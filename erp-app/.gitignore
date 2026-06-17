@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+frontend/dist/
+.cache/
+
+# Environment — NEVER COMMIT
+.env
+
+# Docker volumes (local data)
+postgres_data/
+redis_data/
+uploads_data/
+backups_data/
+backups/*.sql
+backups/*.sql.gz
+
+# SSL certs
+docker/ssl/
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+nginx_logs/

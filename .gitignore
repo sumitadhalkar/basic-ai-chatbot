@@ -1,0 +1,23 @@
+# Ignore nested Git repositories
+**/.git
+**/.git/**
+
+# Python environment and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Node and build artifacts
+node_modules/
+dist/
+build/
+
+# Environment and secret files
+.env
+*.env
+
+# OS and editor files
+.DS_Store
+Thumbs.db
