@@ -19,12 +19,12 @@ export function Modal({ open, onClose, title, children, size = 'md' }: ModalProp
   if (!open) return null
   const sizes = { sm: 'max-w-sm', md: 'max-w-lg', lg: 'max-w-2xl', xl: 'max-w-4xl' }
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in-up">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className={cn('relative w-full rounded-xl bg-white shadow-2xl', sizes[size])}>
+      <div className={cn('relative w-full rounded-xl bg-white shadow-2xl transition-all', sizes[size])} style={{transform: 'perspective(1000px) translateZ(20px)'}}>
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
           <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-          <button onClick={onClose} className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600">
+          <button onClick={onClose} className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-all hover:scale-110">
             <X size={18} />
           </button>
         </div>
@@ -80,7 +80,7 @@ interface PageHeaderProps {
 }
 export function PageHeader({ title, subtitle, action }: PageHeaderProps) {
   return (
-    <div className="mb-6 flex items-start justify-between gap-4">
+    <div className="mb-6 flex items-start justify-between gap-4 animate-slide-in">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
         {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
@@ -100,8 +100,8 @@ interface StatCardProps {
 }
 export function StatCard({ label, value, icon, color = 'bg-primary-50 text-primary-600', sub }: StatCardProps) {
   return (
-    <div className="card p-5 flex items-start gap-4">
-      <div className={cn('flex h-12 w-12 shrink-0 items-center justify-center rounded-xl', color)}>
+    <div className="card-3d p-5 flex items-start gap-4">
+      <div className={cn('flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all transform hover:scale-110', color)}>
         {icon}
       </div>
       <div>
@@ -133,7 +133,7 @@ export function SearchInput({ value, onChange, placeholder = 'Search…' }: Sear
 // ─── Badge ────────────────────────────────────────────────────────────────────
 export function Badge({ label, className }: { label: string; className?: string }) {
   return (
-    <span className={cn('badge', className)}>
+    <span className={cn('badge transition-all transform hover:scale-105', className)}>
       {label.replace(/_/g, ' ')}
     </span>
   )

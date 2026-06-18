@@ -136,18 +136,18 @@ export default function DashboardPage() {
 
       {/* Alerts */}
       {(data.low_stock_products > 0 || data.overdue_invoices > 0) && (
-        <div className="card p-5 border-orange-200 bg-orange-50">
+        <div className="card-3d p-5 border-orange-200 bg-orange-50">
           <h2 className="text-sm font-semibold text-orange-800 mb-2 flex items-center gap-2">
             <AlertTriangle size={16} /> Action Required
           </h2>
           <ul className="space-y-1">
             {data.low_stock_products > 0 && (
-              <li className="text-sm text-orange-700">
+              <li className="text-sm text-orange-700 transition-all transform hover:translate-x-1">
                 ⚠️ {data.low_stock_products} product(s) are below reorder level
               </li>
             )}
             {data.overdue_invoices > 0 && (
-              <li className="text-sm text-orange-700">
+              <li className="text-sm text-orange-700 transition-all transform hover:translate-x-1">
                 ⚠️ {data.overdue_invoices} invoice(s) are overdue
               </li>
             )}

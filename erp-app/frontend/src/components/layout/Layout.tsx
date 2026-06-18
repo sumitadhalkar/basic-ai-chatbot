@@ -44,9 +44,9 @@ export default function Layout() {
 
       {/* Sidebar */}
       <aside className={cn(
-        'fixed inset-y-0 left-0 z-30 flex w-64 flex-col bg-gray-900 transition-transform duration-200',
+        'fixed inset-y-0 left-0 z-30 flex w-64 flex-col bg-gray-900 transition-all duration-300 shadow-xl',
         'lg:relative lg:translate-x-0',
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full',
+        sidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full',
       )}>
         {/* Logo */}
         <div className="flex h-16 items-center gap-3 border-b border-gray-700 px-5">
@@ -71,10 +71,10 @@ export default function Layout() {
               onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
                 cn(
-                  'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                  'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all transform',
                   isActive
-                    ? 'bg-primary-600 text-white'
-                    : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                    ? 'bg-primary-600 text-white shadow-lg hover:shadow-xl'
+                    : 'text-gray-400 hover:bg-gray-800 hover:text-white hover:translate-x-1',
                 )
               }
             >
@@ -108,18 +108,18 @@ export default function Layout() {
       {/* Main area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Topbar */}
-        <header className="flex h-16 items-center gap-4 border-b border-gray-200 bg-white px-4 lg:px-6">
+        <header className="flex h-16 items-center gap-4 border-b border-gray-200 bg-white px-4 lg:px-6 shadow-sm">
           <button
-            className="text-gray-500 hover:text-gray-700 lg:hidden"
+            className="text-gray-500 hover:text-gray-700 lg:hidden transition-all transform hover:scale-110"
             onClick={() => setSidebarOpen(true)}
           >
             <Menu className="h-5 w-5" />
           </button>
           <div className="ml-auto flex items-center gap-3">
-            <button className="relative text-gray-400 hover:text-gray-600 p-1.5 rounded-lg hover:bg-gray-100">
+            <button className="relative text-gray-400 hover:text-gray-600 p-1.5 rounded-lg hover:bg-gray-100 transition-all transform hover:scale-110 hover:shadow-md">
               <Bell size={18} />
             </button>
-            <div className="h-8 w-8 rounded-full bg-primary-600 flex items-center justify-center text-white text-sm font-semibold">
+            <div className="h-8 w-8 rounded-full bg-primary-600 flex items-center justify-center text-white text-sm font-semibold shadow-md">
               {user?.full_name?.[0]?.toUpperCase() ?? 'U'}
             </div>
           </div>

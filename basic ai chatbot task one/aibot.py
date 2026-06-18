@@ -36,6 +36,39 @@ MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 MAX_RETRIES = 3
 RETRY_DELAY = 2
 
+SYSTEM_PROMPT = (
+	"You are a friendly AI chatbot. Answer user messages directly and politely. "
+	"If the user types a greeting, greet them back and ask how you can help. "
+	"If the user enters a short phrase or keyword, treat it as a request and answer it clearly."
+)
+
+GREETINGS = (
+	"hi",
+	"hello",
+	"hey",
+	"hiya",
+	"good morning",
+	"good afternoon",
+	"good evening",
+	"yo",
+)
+
+
+def is_greeting(text):
+	normalized = text.lower().strip()[:-1] if text.strip().endswith("?") else text.lower().strip()
+	return any(
+		normalized == greeting or normalized.startswith(greeting + " ")
+		for greeting in GREETINGS
+	)
+
+
+def build_prompt(text):
+	trimmed = text.strip()
+	if len(trimmed.split()) <= 4 and not trimmed.endswith("?"):
+		trimmed = "Please respond to this request: " + trimmed
+	return f"{SYSTEM_PROMPT}\n\nUser: {trimmed}\nAssistant:"
+
+
 def generate(text):
 	last_error = None
 	for attempt in range(1, MAX_RETRIES + 1):
@@ -75,6 +108,10 @@ def main():
 		if msg.lower() == "exit":
 			print("Goodbye.")
 			break
+
+		if is_greeting(msg):
+			print("AI: Hello! How can I help you today?")
+			continue
 
 		out = generate(msg)
 		print("AI:", out)
