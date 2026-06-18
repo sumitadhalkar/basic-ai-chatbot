@@ -1,115 +1,72 @@
-# Gemini AI Chatbot
+# Gemini AI Chatbot with React UI
 
-A minimal command-line chatbot powered by [Google Gemini](https://ai.google.dev/) via the `google-genai` Python SDK.
+A minimal AI chatbot with a Python backend and React frontend.
 
 ## Features
 
-- Interactive terminal chat loop
-- Configurable model via environment variable
-- Automatic retry with backoff on server errors
-- Optional `.env` file support for local development
+- Flask backend that serves a React frontend
+- Gemini chatbot endpoint at `/api/chat`
+- React chat UI with message bubbles and error handling
 
 ## Requirements
 
 - Python 3.8+
-- A [Google Gemini API key](https://aistudio.google.com/app/apikey)
+- Node.js 18+
+- `google-genai`
+- `python-dotenv`
 
-## Installation
+## Setup
 
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-```
+1. Install Python dependencies:
 
-Optionally create a virtual environment:
-
-```bash
+```powershell
+cd "basic ai chatbot task one"
 python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# macOS/Linux
-source .venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
+.\.venv\Scripts\activate
 pip install -r requirements.txt
+pip install flask
 ```
 
-`requirements.txt` should contain:
+2. Install React frontend dependencies:
 
+```powershell
+cd frontend
+npm install
 ```
-google-genai
-python-dotenv
+
+3. Set your Gemini API key:
+
+```powershell
+$env:GEMINI_API_KEY="your-api-key-here"
 ```
 
-## Configuration
+Or create a `.env` file in `basic ai chatbot task one`:
 
-**Option 1 — `.env` file** (recommended for local dev, do not commit):
-
-```
+```env
 GEMINI_API_KEY=your-api-key-here
 ```
 
-**Option 2 — environment variable:**
+## Run locally
 
-```bash
-# macOS/Linux
-export GEMINI_API_KEY="your-api-key-here"
+1. Build the React app:
 
-# Windows PowerShell (current session)
-$env:GEMINI_API_KEY="your-api-key-here"
-
-# Windows PowerShell (permanent)
-setx GEMINI_API_KEY "your-api-key-here"
+```powershell
+cd frontend
+npm run build
 ```
 
-To use a different model (default: `gemini-2.5-flash`):
+2. Start the Flask server:
 
-```
-GEMINI_MODEL=gemini-2.5-pro
-```
-
-## Usage
-
-```bash
-python chatbot.py
+```powershell
+cd ..
+.\.venv\Scripts\activate
+python aibot_server.py
 ```
 
-```
-Simple chatbot — type 'exit' to quit.
-You: What is the capital of France?
-AI: The capital of France is Paris.
-You: exit
-Goodbye.
-```
+3. Open `http://localhost:5000` in your browser.
 
-## Project Structure
+## Notes
 
-```
-.
-├── chatbot.py        # Main chatbot script
-├── requirements.txt  # Python dependencies
-├── .env              # Local secrets (not committed)
-└── .gitignore
-```
-
-## .gitignore
-
-```
-.env
-__pycache__/
-*.pyc
-.venv/
-```
-
-## Limitations
-
-- No conversation history — each message is sent independently with no memory of prior turns
-- No streaming output
-- Single-user, single-session only
-
-## License
-
-MIT
+- The React app is served from `frontend/build`.
+- The Flask API endpoint is `/api/chat`.
+- Keep `.env` out of version control.
